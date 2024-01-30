@@ -1,0 +1,53 @@
+name: Build for Production Backend
+
+on:
+  push:
+    branches:
+      - main
+      
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.21' # Замените на необходимую версию Go
+
+      - name: Install dependencies user_auth_controller
+        working-directory: ./backend/user_auth_controller/
+        run: go mod download
+
+      - name: Build user_auth_controller
+        working-directory: ./backend/user_auth_controller/
+        run: |
+          go build -o user_auth_controller
+          
+          
+
+      - name: Install dependencies user-temporary-data-service
+        working-directory: ./backend/user-temporary-data-service/
+        run: go mod download
+
+      - name: Build user-temporary-data-service
+        working-directory: ./backend/user-temporary-data-service/
+        run: |
+          go build -o user-temporary-data-service
+          
+          
+
+      - name: Install dependencies deployment_manager
+        working-directory: ./backend/deployment_manager/
+        run: go mod download
+
+      - name: Build deployment_manager
+        working-directory: ./backend/deployment_manager/
+        run: |
+          go build -o deployment_manager

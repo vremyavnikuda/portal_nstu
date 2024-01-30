@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/backend"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm" # Замените "npm" на вашу систему управления пакетами
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
+
+

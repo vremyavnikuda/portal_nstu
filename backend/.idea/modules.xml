@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/backend.iml" filepath="$PROJECT_DIR$/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-temporary-data-service.iml" filepath="$PROJECT_DIR$/user-temporary-data-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user_auth_controller.iml" filepath="$PROJECT_DIR$/user_auth_controller.iml" />
+    </modules>
+  </component>
+</project>

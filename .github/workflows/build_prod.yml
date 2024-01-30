@@ -1,0 +1,39 @@
+name: Build for Production Frontend
+
+on:
+  push:
+    branches:
+      - main
+      
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Angular CLI
+        working-directory: ./frontend
+        run: npm install -g @angular/cli
+
+      - name: Verify Angular CLI installation
+        working-directory: ./frontend
+        run: npx ng version
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Build for Production
+        working-directory: ./frontend
+        run: ng build --configuration production
