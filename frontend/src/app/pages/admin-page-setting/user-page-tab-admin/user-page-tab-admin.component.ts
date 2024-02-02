@@ -238,7 +238,6 @@ export class UserPageTabAdminComponent implements OnInit {
   //Обновление данных пользователя и последующее обновление талицы
   openEditForm(data: any) {
     console.log('Data before opening EditUserAdminComponent:', data)
-    this._coreService.openSnackBar('Данные обновлены!', 'ok')
 
     const dialogRef = this._dialog.open(EditUserAdminComponent, {
       data: {

@@ -139,7 +139,7 @@ export class InfoUserAdminPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addInfoUserForm(this.data.id)
+    this.addInfoUserForm(this.data.id);
   }
 
   addInfoUserForm(id: string): void {

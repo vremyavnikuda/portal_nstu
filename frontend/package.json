@@ -9,7 +9,6 @@
     "test": "ng test",
     "lint": "npm run lint:eslint && npm run lint:prettier"
   },
-
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.0.8",
@@ -26,6 +25,7 @@
     "@gitgraph/js": "^1.4.0",
     "@mui/icons-material": "^5.15.0",
     "@ngneat/hot-toast": "^6.0.2",
+    "amqp-ts": "^1.8.0",
     "d3": "^7.8.5",
     "gojs": "^2.3.13",
     "obsidian-api": "^1.0.9",

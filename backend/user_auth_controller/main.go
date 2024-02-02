@@ -4,6 +4,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/pterm/pterm"
+	"github.com/streadway/amqp"
 	"user_auth_controller/database"
 	"user_auth_controller/routes"
 )
@@ -26,7 +27,19 @@ func main() {
 		AllowHeaders:     "Origin, Content-Type, Accept,Access-Control-Allow-Origin",
 	}))
 
+	//RabbitMQ
+	rabbitMQ, err := database.GetConnection()
+
+	//Подключение к брокеру RabbitMQ
+	rabbitMQ.NotifyClose(make(chan *amqp.Error))
 	routes.Setup(app)
+
+	if err != nil {
+		pterm.Fatal.Printfln("Failed to connect to RabbitMQ: %v", err)
+		return
+	} else {
+		pterm.Info.Printfln("Connected to RabbitMQ")
+	}
 
 	if port == ":8080" {
 		pterm.Info.Printfln("Running on port 8080 🐳", title)
@@ -37,6 +50,5 @@ func main() {
 		pterm.Info.Printfln("Database connection")
 		pterm.Info.Printfln("Routing works")
 	}
-
 	app.Listen(port)
 }
