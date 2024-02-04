@@ -11,7 +11,7 @@ import {LandingComponent} from "../landing/landing.component";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Emitters} from "../../emitters/emitters";
 import {MygroupComponent} from "../mygroup/mygroup.component";
-import { MatTableDataSource } from '@angular/material/table'
+import {MatTableDataSource} from '@angular/material/table'
 
 
 //Основная страница отображения контента
@@ -33,8 +33,8 @@ import { MatTableDataSource } from '@angular/material/table'
         MygroupComponent
     ],
     template: `
-      {{ message }}
-      <app-landing></app-landing>
+        {{ message }}
+        <app-landing></app-landing>
     `,
     styles: [`
 
@@ -50,7 +50,7 @@ export class MainComponent implements OnInit {
     }
 
     //Пока точно не знаю надо мне оно тут или нет ,но пока что оставлю
-    dataSourceApi:string[]=[
+    dataSourceApi: string[] = [
         'id',
         'login',
         'first_name',
@@ -66,9 +66,6 @@ export class MainComponent implements OnInit {
     message = ''
 
     ngOnInit(): void {
-        this.getInfoUserBadges();
-    }
-    getInfoUserBadges() {
         this.http.get('http://localhost:8000/api/user', {
             withCredentials: true,
             headers: new HttpHeaders({
