@@ -50,5 +50,6 @@ func main() {
 		pterm.Info.Printfln("Database connection")
 		pterm.Info.Printfln("Routing works")
 	}
+	pterm.Info.Printfln("rabbitMQURL works port:amqp://guest:guest@rabbitmq:5672/")
 	app.Listen(port)
 }

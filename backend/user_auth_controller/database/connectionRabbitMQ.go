@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+/*
+"amqp://guest:guest@localhost:5672/" localhost:5672
+"amqp://guest:guest@rabbitmq:5672/" docker compose up
+*/
 const rabbitMQURL = "amqp://guest:guest@localhost:5672/"
 const queueName = "user_info_queue"
 
