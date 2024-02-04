@@ -7,7 +7,6 @@ import {MypersonalpageComponent} from "./pages/mypersonalpage/mypersonalpage.com
 import {SessionComponent} from "./pages/session/session.component";
 import {LoginPageComponent} from "./pages/login/login-pages/login-page.component";
 import {MainComponent} from "./pages/main/main.component";
-import {LandingComponent} from "./pages/landing/landing.component";
 import {RegistrationComponent} from "./pages/registration/registration.component";
 import {
     UserPersonalPagePortalComponent
