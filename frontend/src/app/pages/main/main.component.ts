@@ -8,7 +8,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {AuthenticationService} from "../../services/authentication.service";
 import {LandingComponent} from "../landing/landing.component";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Emitters} from "../../emitters/emitters";
 import {MygroupComponent} from "../mygroup/mygroup.component";
 import { MatTableDataSource } from '@angular/material/table'
@@ -42,7 +42,11 @@ import { MatTableDataSource } from '@angular/material/table'
 })
 
 export class MainComponent implements OnInit {
-    constructor(public authService: AuthenticationService, private router: Router, private http: HttpClient) {
+    constructor(
+        public authService: AuthenticationService,
+        private router: Router,
+        private http: HttpClient
+    ) {
     }
 
     //Пока точно не знаю надо мне оно тут или нет ,но пока что оставлю
@@ -62,7 +66,15 @@ export class MainComponent implements OnInit {
     message = ''
 
     ngOnInit(): void {
-        this.http.get('http://localhost:8000/api/user', {withCredentials: true}).subscribe(
+        this.getInfoUserBadges();
+    }
+    getInfoUserBadges() {
+        this.http.get('http://localhost:8000/api/user', {
+            withCredentials: true,
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        }).subscribe(
             (res: any) => {
                 this.message = `${res.last_name} ${res.first_name} ${res.middle_name}`;
                 Emitters.authEmitter.emit(true);
