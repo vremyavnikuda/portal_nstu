@@ -1,14 +1,47 @@
 version: '3.9'
 
 services:
-  backend:
-    container_name: backend_go
-    image: backend_go
-    build: .
+  rabbitmq:
+    container_name: rabbitmq
+    image: "rabbitmq:3-management"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  user-auth-controller:
+    container_name: user_auth_controller
+    image: user_auth_controller
+    build:
+      context: ./backend/user_auth_controller/
+      dockerfile: /Dockerfile
     environment:
       DATABASE_URL: "host=postgres user=postgres password=25101989 dbname=postgres port=5432 sslmode=disable "
     ports:
-      - "8080:8080"
+      - "8000:8000"
+
+  user-temporary-data-service:
+    container_name: user_temporary_data_service
+    image: user_temporary_data_service
+    build:
+      context: ./backend/user-temporary-data-service/
+      dockerfile: /Dockerfile
+    environment:
+      DATABASE_URL: "host=postgres user=postgres password=25101989 dbname=postgres port=5432 sslmode=disable "
+    ports:
+      - "8001:8001"
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: /Dockerfile
+    ports:
+      - "4200:4200"
+    command: [ "nginx", "-g", "daemon off;" ]
 
 
   database:
@@ -30,13 +63,9 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: "andrew.nevsky@yandex.ru"
       PGADMIN_DEFAULT_PASSWORD: "25101989"
-    ports :
+    ports:
       - 5050:80
 
 
 volumes:
   pgdata: {}
-
-
-
-
