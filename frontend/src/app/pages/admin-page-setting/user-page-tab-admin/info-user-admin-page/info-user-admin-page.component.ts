@@ -87,6 +87,12 @@ import { UserService } from '../../adminService/UserService'
             Роль:
           </mat-card-content>
         </mat-card>
+
+        <mat-card>
+          <mat-card-content group="group">
+            Группа:
+          </mat-card-content>
+        </mat-card>
       </div>
 
     </div>
@@ -126,7 +132,8 @@ export class InfoUserAdminPageComponent implements OnInit {
     'email',
     'gender',
     'b_days',
-    'role'
+    'role',
+    'group'
   ]
 
   dataSource!: MatTableDataSource<any>
@@ -196,6 +203,11 @@ export class InfoUserAdminPageComponent implements OnInit {
     const roleElement = document.getElementById('role')
     if (roleElement) {
       roleElement.innerText = 'Роль: ' + data.role
+    }
+
+    const groupElement = document.getElementById('group')
+    if (groupElement) {
+      groupElement.innerText = 'Группа: ' + data.group
     }
   }
 }

@@ -16,4 +16,5 @@ export interface UserInfo {
   gender: string;
   b_days: string;
   role: string;
+  group: string;
 }

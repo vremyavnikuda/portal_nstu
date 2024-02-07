@@ -9,6 +9,7 @@ import { RouterOutlet } from '@angular/router'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { UserService } from './adminService/UserService'
 import { EditUserAdminComponent } from './user-page-tab-admin/edit-user-admin/edit-user-admin.component'
+import { FacultiesInfoComponent } from './faculties-info/faculties-info.component'
 
 @Component({
     selector: 'app-admin-page-setting',
@@ -23,6 +24,7 @@ import { EditUserAdminComponent } from './user-page-tab-admin/edit-user-admin/ed
         SettingPageAdminComponent,
         RouterOutlet,
         HttpClientModule,
+        FacultiesInfoComponent
 
     ], providers: [
         UserService, EditUserAdminComponent
@@ -31,9 +33,15 @@ import { EditUserAdminComponent } from './user-page-tab-admin/edit-user-admin/ed
         <app-sidenav-admin></app-sidenav-admin>
         <p>Страница находится в разработке</p>
         <mat-tab-group>
-            <mat-tab label="User">
+            // TODO: Страница управление пользователями
+            <mat-tab label="Пользователи">
                 <app-user-page-tab-admin></app-user-page-tab-admin>
             </mat-tab>
+            // TODO: Страница управление факультетами и группами
+            <mat-tab label="Факультеты">
+                <app-faculties-info></app-faculties-info>
+            </mat-tab>
+            // TODO: Страница управление группами
             <mat-tab label="Dashboard">
                 <app-dashboard-page-tab-admin></app-dashboard-page-tab-admin>
             </mat-tab>

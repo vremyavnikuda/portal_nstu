@@ -54,7 +54,7 @@ export class RoadDevComponent implements OnInit {
   draw(): void {
     // Ваши данные для графа
     const nodes = [
-      { id: 0, label: 'NSTU Project ⚙️', group: '0', size: 40 },
+      { id: 0, label: 'Project ⚙️', group: '0', size: 40 },
 
 
       //admin control panel

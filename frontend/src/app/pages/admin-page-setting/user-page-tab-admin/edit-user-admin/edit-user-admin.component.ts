@@ -141,6 +141,24 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
             </mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Факультет</mat-label>
+          <mat-select formControlName="role" placeholder="Факультет" required>
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{ role }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Группа</mat-label>
+          <mat-select formControlName="role" placeholder="Группа" required>
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{ role }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </form>
     </div>
     <div mat-dialog-actions>
@@ -187,7 +205,8 @@ export class EditUserAdminComponent {
     'email',
     'gender',
     'b_days',
-    'role'
+    'role',
+    'group'
   ]
 
   editUserForm: FormGroup
