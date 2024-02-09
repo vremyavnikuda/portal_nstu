@@ -1,6 +1,7 @@
 package main
 
 import (
+	"facultiesService/api"
 	"facultiesService/database"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -20,6 +21,8 @@ func main() {
 		AllowOrigins:     "http://localhost:4200",
 		AllowHeaders:     "Origin, Content-Type, Accept,Access-Control-Allow-Origin",
 	}))
+	
+	api.SetupAPI(app)
 
 	pterm.Info.Printfln("%s is running on port %s", title, port)
 	app.Listen(port)

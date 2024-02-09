@@ -1,12 +1,27 @@
 package models
 
-// FacultyData
-// Структура для хранения данных о факультете, группе и студенте который относится к группе и факультету
+type Faculty struct {
+	UserID uint   `gorm:"primary key"`
+	Name   string `gorm:"unique"`
+}
+
+type Group struct {
+	UserID    uint   `gorm:"primary key"`
+	Name      string `gorm:"unique"`
+	FacultyId int    `gorm:"ForeignKey:FacultyRefer"`
+}
+
+type Student struct {
+	UserID   uint `gorm:"primary key"`
+	FullName string
+	GroupId  int `gorm:"ForeignKey:GroupRefer"`
+	Status   string
+}
 
 type FacultyData struct {
-	NameFacultyAbbreviation string `gorm:"unique" json:"NameFacultyAbbreviation"` //Идентификатор факультета
-	NameFaculty             int    `json:"NameFaculty"`                           //Идентификатор факультета
-	NameGroup               int    `gorm:"unique" json:"NameGroup"`               //Идентификатор группы
-	IdStudent               int    `gorm:"primary key" json:"IdStudent"`          //Идентификатор студента
-	StatusStudent           string `json:"StatusStudent"`                         //Статус студента
+	FacultyRefer uint
+	GroupRefer   uint
+	Faculty      Faculty `gorm:"ForeignKey:FacultyRefer"`
+	Group        Group   `gorm:"ForeignKey:GroupRefer"`
+	Student      []Student
 }

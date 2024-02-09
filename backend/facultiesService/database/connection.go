@@ -43,5 +43,5 @@ func Connect() {
 
 	pterm.Debug.Printfln("DSN: %s", dsn)
 	DB = connection
-	connection.AutoMigrate(&models.FacultyData{})
+	connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{})
 }

@@ -29,6 +29,9 @@ func main() {
 
 	//RabbitMQ
 	rabbitMQ, err := database.GetConnection()
+	if err != nil {
+		pterm.Fatal.Printfln("Failed to connect to RabbitMQ: %v", err)
+	}
 
 	//Подключение к брокеру RabbitMQ
 	rabbitMQ.NotifyClose(make(chan *amqp.Error))
