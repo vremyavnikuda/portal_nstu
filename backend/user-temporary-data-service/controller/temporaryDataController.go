@@ -151,10 +151,6 @@ func AddUserDataRegistration(context *fiber.Ctx) error {
 			pterm.Fatal.Printfln("Ошибка при обновлении возраста пользователя в базе данных User_temporary_data", "error", err)
 		}
 
-		/*
-			Вчера остановился тут, так и не решил проблему почему возраст пользователя не добавляется в базу данных Users
-			В User_temporary_data возраст добавляется ,а вот в Users возраст не добавляется
-		*/
 		updateValuesUAC := map[string]interface{}{"user_age": ageStr}
 		if err := database.DB.Model(&ageAddUserTemporaryData).Where("login = ?", ageAddUserTemporaryData.Login).Updates(updateValuesUAC).Error; err != nil {
 			pterm.Fatal.Printfln("Ошибка при обновлении возраста пользователя в базе данных Users", "error", err)
