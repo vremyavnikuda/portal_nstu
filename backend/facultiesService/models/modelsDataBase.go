@@ -12,9 +12,9 @@ type Group struct {
 }
 
 type Student struct {
-	UserID   uint `gorm:"primary key"`
-	FullName string
-	GroupId  int `gorm:"ForeignKey:GroupRefer"`
+	UserID   uint   `json:"UserID"`
+	FullName string `json:"FullName"`
+	GroupId  int    `gorm:"ForeignKey:GroupRefer"`
 	Status   string
 }
 
