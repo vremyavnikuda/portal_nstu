@@ -4,6 +4,7 @@ import (
 	"github.com/pterm/pterm"
 	"github.com/streadway/amqp"
 	"sync"
+	"time"
 )
 
 /*
@@ -26,7 +27,7 @@ func GetConnection() (*amqp.Connection, error) {
 			pterm.Fatal.Printfln("Failed to connect to RabbitMQ: %v", connErr)
 		}
 
-		/*go func() {
+		go func() {
 			for {
 				if conn.IsClosed() {
 					pterm.Warning.Printfln("RabbitMQ connection closed. Reconnecting...")
@@ -39,7 +40,7 @@ func GetConnection() (*amqp.Connection, error) {
 				}
 				time.Sleep(5 * time.Second)
 			}
-		}()*/
+		}()
 	})
 	return conn, connErr
 }

@@ -43,7 +43,9 @@ func ProcessStudentMessages(stopCh <-chan struct{}) error {
 		return fmt.Errorf("failed to register a consumer: %v", err)
 	}
 
+	doneCh := make(chan struct{})
 	go func() {
+		defer close(doneCh)
 		defer fmt.Println("Consumer stopped")
 		for {
 			select {
@@ -98,6 +100,7 @@ func ProcessStudentMessages(stopCh <-chan struct{}) error {
 	}()
 
 	pterm.Info.Printfln(" [*] Waiting for messages. To exit press CTRL+C")
-	<-stopCh
+	<-doneCh
+	_ = rabbitMQ.Close()
 	return nil
 }
