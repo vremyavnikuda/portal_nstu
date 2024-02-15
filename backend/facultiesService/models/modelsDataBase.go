@@ -1,8 +1,9 @@
 package models
 
 type Faculty struct {
-	UserID uint   `gorm:"primary key"`
-	Name   string `gorm:"unique"`
+	UserID               uint   `gorm:"primary key"`
+	Name                 string `gorm:"unique"`
+	ReductionFacultyName string `json:"ReductionFacultyName"`
 }
 
 type Group struct {
