@@ -21,6 +21,7 @@ import { ProjectBasicsComponent } from '../../disciplines/project-basics/project
 import { MatTableDataSource } from '@angular/material/table'
 import { NgForOf, NgIf } from '@angular/common'
 import { MygroupComponent } from '../../mygroup/mygroup.component'
+import { MatCard, MatCardContent } from '@angular/material/card'
 
 @Component({
   selector: 'app-faculties-info',
@@ -42,26 +43,33 @@ import { MygroupComponent } from '../../mygroup/mygroup.component'
     PhysicalEducationSportComponent,
     ProjectBasicsComponent,
     NgIf,
-    NgForOf
+    NgForOf,
+    MatCard,
+    MatCardContent
   ], providers: [MygroupComponent],
   template: `
     <p>
       faculties-info works!
     </p>
     <h1 class="main-body">Учебные факультеты</h1>
-    <div class="main-body" *ngIf="dataSource && dataSource.data && dataSource.data.length>0">
-      <mat-accordion *ngFor="let faculty of dataSource.data">
+    <div class="main-body" *ngIf="_dataFaculty && _dataFaculty.data && _dataFaculty.data.length>0">
+      <mat-accordion *ngFor="let facultyData of _dataFaculty.data">
         <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false" class="user-card">
+          <mat-card *ngFor="let groupData of _dataGroup.data" class="user-card">
+            <mat-card-content *ngIf="_dataGroup.data ==_dataGroup.data">
+              {{ groupData.Name }}
+            </mat-card-content>
+          </mat-card>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ faculty.Name }}
+              {{ facultyData.Name }}
             </mat-panel-title>
           </mat-expansion-panel-header>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-    <div *ngIf="!dataSource || !dataSource.data || dataSource.data.length === 0" class="main-body">
+    <div *ngIf="!_dataFaculty || !_dataFaculty.data || _dataFaculty.data.length === 0" class="main-body">
       Данные загружаются...
     </div>
 
@@ -85,7 +93,8 @@ import { MygroupComponent } from '../../mygroup/mygroup.component'
 })
 export class FacultiesInfoComponent implements OnInit {
   panelOpenState = false
-  dataSource!: MatTableDataSource<any>
+  _dataFaculty!: MatTableDataSource<any>
+  _dataGroup!: MatTableDataSource<any>
 
   constructor(
     private _http: HttpClient
@@ -94,16 +103,16 @@ export class FacultiesInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDataFaculties()
-    //this.loadDataGroups()
+    this.loadDataGroups()
   }
 
 
   //API запрос на получение всех факультетов
   loadDataFaculties() {
     this._http.get<any[]>('http://localhost:8080/api/get/facultyService/getAllFaculties').subscribe(
-      (data) => {
-        this.dataSource = new MatTableDataSource(data)
-        console.log(data)
+      (dataFaculty) => {
+        this._dataFaculty = new MatTableDataSource(dataFaculty)
+        console.log(dataFaculty)
       },
       (error) => {
         console.error('Error:', error)
@@ -112,15 +121,15 @@ export class FacultiesInfoComponent implements OnInit {
   }
 
   //API запрос на получение всех групп
-  /*loadDataGroups() {
+  loadDataGroups() {
     this._http.get<any[]>('http://localhost:8080/api/get/facultyService/getAllGroups').subscribe(
-      (data) => {
-        this.dataSource = new MatTableDataSource(data)
-        console.log(data)
+      (dataGroup) => {
+        this._dataGroup = new MatTableDataSource(dataGroup)
+        console.log(dataGroup)
       },
       (error) => {
         console.error('Error:', error)
       }
     )
-  }*/
+  }
 }
