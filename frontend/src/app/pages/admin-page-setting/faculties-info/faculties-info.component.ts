@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatFormField, MatLabel } from '@angular/material/form-field'
 import { MatInput } from '@angular/material/input'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 import {
   BasicRussiaFoundationsComponent
 } from '../../disciplines/basic-russia-foundations/basic-russia-foundations.component'
@@ -18,6 +18,9 @@ import {
   PhysicalEducationSportComponent
 } from '../../disciplines/physical-education-sport/physical-education-sport.component'
 import { ProjectBasicsComponent } from '../../disciplines/project-basics/project-basics.component'
+import { MatTableDataSource } from '@angular/material/table'
+import { NgForOf, NgIf } from '@angular/common'
+import { MygroupComponent } from '../../mygroup/mygroup.component'
 
 @Component({
   selector: 'app-faculties-info',
@@ -37,98 +40,34 @@ import { ProjectBasicsComponent } from '../../disciplines/project-basics/project
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     PhysicalEducationSportComponent,
-    ProjectBasicsComponent
-  ],
+    ProjectBasicsComponent,
+    NgIf,
+    NgForOf
+  ], providers: [MygroupComponent],
   template: `
     <p>
       faculties-info works!
     </p>
-    <h1>Учебные факультеты</h1>
-    <div class="main-body">
-      <mat-accordion>
-
+    <h1 class="main-body">Учебные факультеты</h1>
+    <div class="main-body" *ngIf="dataSource && dataSource.data && dataSource.data.length>0">
+      <mat-accordion *ngFor="let faculty of dataSource.data">
         <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
+                             (closed)="panelOpenState = false" class="user-card">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Факультет 1
+              {{ faculty.Name }}
             </mat-panel-title>
           </mat-expansion-panel-header>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-
-    <div class="main-body">
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Факультет 2
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-
-    <div class="main-body">
-      <mat-accordion>
-
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Факультет 3
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-
-    <div class="main-body">
-      <mat-accordion>
-
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Факультет 4
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-
-    <div class="main-body">
-      <mat-accordion>
-
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Факультет 5
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-
-    <div class="main-body">
-      <mat-accordion>
-
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Факультет 6
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion>
+    <div *ngIf="!dataSource || !dataSource.data || dataSource.data.length === 0" class="main-body">
+      Данные загружаются...
     </div>
 
   `,
   styles: [`
+
     .main-body {
       padding-top: 20px;
       margin: 0 auto;
@@ -138,11 +77,50 @@ import { ProjectBasicsComponent } from '../../disciplines/project-basics/project
         width: 100%;
       }
     }
+
+    .user-card {
+      margin-bottom: 16px;
+    }
   `]
 })
-export class FacultiesInfoComponent {
+export class FacultiesInfoComponent implements OnInit {
   panelOpenState = false
+  dataSource!: MatTableDataSource<any>
 
-  constructor() {
+  constructor(
+    private _http: HttpClient
+  ) {
   }
+
+  ngOnInit(): void {
+    this.loadDataFaculties()
+    //this.loadDataGroups()
+  }
+
+
+  //API запрос на получение всех факультетов
+  loadDataFaculties() {
+    this._http.get<any[]>('http://localhost:8080/api/get/facultyService/getAllFaculties').subscribe(
+      (data) => {
+        this.dataSource = new MatTableDataSource(data)
+        console.log(data)
+      },
+      (error) => {
+        console.error('Error:', error)
+      }
+    )
+  }
+
+  //API запрос на получение всех групп
+  /*loadDataGroups() {
+    this._http.get<any[]>('http://localhost:8080/api/get/facultyService/getAllGroups').subscribe(
+      (data) => {
+        this.dataSource = new MatTableDataSource(data)
+        console.log(data)
+      },
+      (error) => {
+        console.error('Error:', error)
+      }
+    )
+  }*/
 }

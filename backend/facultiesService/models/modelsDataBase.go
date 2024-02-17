@@ -7,9 +7,9 @@ type Faculty struct {
 }
 
 type Group struct {
-	UserID    uint   `gorm:"primary key"`
-	Name      string `gorm:"unique"`
-	FacultyId int    `gorm:"ForeignKey:FacultyRefer"`
+	UserID               uint   `gorm:"primary key"`
+	Name                 string `gorm:"unique"`
+	ReductionFacultyName string `gorm:"ForeignKey:FacultyRefer"`
 }
 
 type Student struct {

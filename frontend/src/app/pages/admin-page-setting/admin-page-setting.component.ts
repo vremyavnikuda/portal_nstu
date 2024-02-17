@@ -27,7 +27,7 @@ import { FacultiesInfoComponent } from './faculties-info/faculties-info.componen
         FacultiesInfoComponent
 
     ], providers: [
-        UserService, EditUserAdminComponent
+        UserService, EditUserAdminComponent, FacultiesInfoComponent
     ],
     template: `
         <app-sidenav-admin></app-sidenav-admin>
