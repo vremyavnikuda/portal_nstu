@@ -57,7 +57,7 @@ import { MatCard, MatCardContent } from '@angular/material/card'
         <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false" class="user-card">
           <mat-card *ngFor="let groupData of _dataGroup.data" class="user-card">
-            <mat-card-content *ngIf="_dataGroup.data ==_dataGroup.data">
+            <mat-card-content *ngIf="groupData.ReductionFacultyName == facultyData.ReductionFacultyName">
               {{ groupData.Name }}
             </mat-card-content>
           </mat-card>
@@ -68,6 +68,7 @@ import { MatCard, MatCardContent } from '@angular/material/card'
           </mat-expansion-panel-header>
         </mat-expansion-panel>
       </mat-accordion>
+
     </div>
     <div *ngIf="!_dataFaculty || !_dataFaculty.data || _dataFaculty.data.length === 0" class="main-body">
       Данные загружаются...

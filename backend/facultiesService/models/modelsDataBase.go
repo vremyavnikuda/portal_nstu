@@ -1,28 +1,29 @@
 package models
 
 type Faculty struct {
-	UserID               uint   `gorm:"primary key"`
-	Name                 string `gorm:"unique"`
-	ReductionFacultyName string `json:"ReductionFacultyName"`
+	UserID               uint `gorm:"primary key"`
+	Name                 string
+	ReductionFacultyName string `gorm:"unique"`
 }
 
 type Group struct {
-	UserID               uint   `gorm:"primary key"`
-	Name                 string `gorm:"unique"`
-	ReductionFacultyName string `gorm:"ForeignKey:FacultyRefer"`
+	UserID               uint `gorm:"primary key"`
+	Name                 string
+	ReductionFacultyName string `gorm:"ForeignKey:ReductionFacultyName"`
 }
 
 type Student struct {
 	UserID   uint   `json:"UserID"`
 	FullName string `json:"FullName"`
-	GroupId  int    `gorm:"ForeignKey:GroupRefer"`
+	GroupId  uint   `gorm:"ForeignKey:GroupRefer"`
 	Status   string
 }
 
 type FacultyData struct {
 	FacultyRefer uint
 	GroupRefer   uint
-	Faculty      Faculty `gorm:"ForeignKey:FacultyRefer"`
-	Group        Group   `gorm:"ForeignKey:GroupRefer"`
-	Student      []Student
+	StudentRefer uint
+	Faculty      Faculty   `gorm:"ForeignKey:FacultyRefer"`
+	Group        Group     `gorm:"ForeignKey:GroupRefer"`
+	Student      []Student `gorm:"ForeignKey:StudentRefer"`
 }
