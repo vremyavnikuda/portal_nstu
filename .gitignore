@@ -6,3 +6,5 @@ backend/user-temporary-data-service/user-temporary-data-service.exe
 
 /.angular/
 /dist/
+
+backend/.idea/

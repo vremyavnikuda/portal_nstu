@@ -38,9 +38,7 @@ import {PhysicalEducationSportComponent} from "./physical-education-sport/physic
                           <mat-panel-title>
                               История России
                           </mat-panel-title>
-                          <mat-panel-description>
-                              Currently I am {{ panelOpenState ? 'open' : 'closed' }}
-                          </mat-panel-description>
+                          
                       </mat-expansion-panel-header>
                       <app-history></app-history>
                   </mat-expansion-panel>
@@ -55,9 +53,7 @@ import {PhysicalEducationSportComponent} from "./physical-education-sport/physic
                           <mat-panel-title>
                               Линейная алгебра
                           </mat-panel-title>
-                          <mat-panel-description>
-                              Currently I am {{ panelOpenState ? 'open' : 'closed' }}
-                          </mat-panel-description>
+                        
                       </mat-expansion-panel-header>
                       <app-l-algebra></app-l-algebra>
                   </mat-expansion-panel>
@@ -73,9 +69,6 @@ import {PhysicalEducationSportComponent} from "./physical-education-sport/physic
                           <mat-panel-title>
                               Математический анализ
                           </mat-panel-title>
-                          <mat-panel-description>
-                              Currently I am {{ panelOpenState ? 'open' : 'closed' }}
-                          </mat-panel-description>
                       </mat-expansion-panel-header>
                       <app-mat-analysis></app-mat-analysis>
                   </mat-expansion-panel>
@@ -91,9 +84,7 @@ import {PhysicalEducationSportComponent} from "./physical-education-sport/physic
                           <mat-panel-title>
                               Основы проектной деятельности
                           </mat-panel-title>
-                          <mat-panel-description>
-                              Currently I am {{ panelOpenState ? 'open' : 'closed' }}
-                          </mat-panel-description>
+                        
                       </mat-expansion-panel-header>
                       <app-project-basics></app-project-basics>
                   </mat-expansion-panel>
@@ -109,9 +100,6 @@ import {PhysicalEducationSportComponent} from "./physical-education-sport/physic
                           <mat-panel-title>
                               Основы российской государственности
                           </mat-panel-title>
-                          <mat-panel-description>
-                              Currently I am {{ panelOpenState ? 'open' : 'closed' }}
-                          </mat-panel-description>
                       </mat-expansion-panel-header>
                       <app-basic-russia-foundations></app-basic-russia-foundations>
                   </mat-expansion-panel>
@@ -127,9 +115,6 @@ import {PhysicalEducationSportComponent} from "./physical-education-sport/physic
                           <mat-panel-title>
                               Физическая культура и спорт
                           </mat-panel-title>
-                          <mat-panel-description>
-                              Currently I am {{ panelOpenState ? 'open' : 'closed' }}
-                          </mat-panel-description>
                       </mat-expansion-panel-header>
                       <app-physical-education-sport></app-physical-education-sport>
                   </mat-expansion-panel>
