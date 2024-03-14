@@ -32,6 +32,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@mobiscroll/angular/dist/css/mobiscroll.min.css",
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],

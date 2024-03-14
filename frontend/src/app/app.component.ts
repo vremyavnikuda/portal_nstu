@@ -1,3 +1,5 @@
+import { MbscModule } from '@mobiscroll/angular';
+import { FormsModule } from '@angular/forms';
 import {Component, computed, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterOutlet} from '@angular/router';
@@ -13,11 +15,12 @@ import {MygroupComponent} from "./pages/mygroup/mygroup.component";
 import {ScheduleComponent} from "./pages/schedule/schedule.component";
 import {MypersonalpageComponent} from "./pages/mypersonalpage/mypersonalpage.component";
 import {SessionComponent} from "./pages/session/session.component";
+import { BrowserModule } from '@angular/platform-browser'
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [
+    imports: [MbscModule, FormsModule, 
         CommonModule,
         RouterOutlet,
         MatToolbarModule,
@@ -34,7 +37,9 @@ import {SessionComponent} from "./pages/session/session.component";
         MygroupComponent,
         ScheduleComponent,
         MypersonalpageComponent,
-        SessionComponent
+        SessionComponent,
+        BrowserModule,
+
     ],
     template: `
         <router-outlet></router-outlet>
