@@ -42,6 +42,6 @@ export class SidenavAdminComponent {
   }
   //Метод перенаправления на домашнюю страницу проекта
   goHomePageProject(){
-    this.router.navigate(['main'])
+    this.router.navigate(['main']).then(r => true)
   }
 }
