@@ -1,9 +1,10 @@
 package controller
 
 import (
+	"github.com/gofiber/fiber/v2"
+
 	"facultiesService/database"
 	"facultiesService/models"
-	"github.com/gofiber/fiber/v2"
 )
 
 // AddNewFaculties /*TODO:AddNewFaculties -> Добавление нового факультета

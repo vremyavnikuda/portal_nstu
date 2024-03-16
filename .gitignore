@@ -8,3 +8,7 @@ backend/user-temporary-data-service/user-temporary-data-service.exe
 /dist/
 
 backend/.idea/
+
+backend/calendar_service/.idea/
+
+*.json
