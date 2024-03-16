@@ -65,8 +65,6 @@ setOptions({
       width: 200px;
     }
 
-    /* material header order */
-
     .mbsc-material.cal-header-prev {
       order: 1;
     }
@@ -118,8 +116,7 @@ export class ScheduleComponent implements OnInit {
   constructor(
     private _http: HttpClient,
     private notify: Notifications
-  ) {
-  }
+  ) {}
 
   myEvents: MbscCalendarEvent[] = [];
   view = 'month';
