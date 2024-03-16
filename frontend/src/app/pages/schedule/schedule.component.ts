@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatCardModule } from '@angular/material/card'
 import {
   MbscCalendarEvent,
   MbscEventcalendarOptions,
@@ -24,9 +25,13 @@ setOptions({
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientJsonpModule
+    HttpClientJsonpModule,
+    MatCardModule
   ],
   template: `
+  <mat-card class="user-card">
+
+    <mat-card-content>
     <div class="md-switching-view-cont">
       <mbsc-eventcalendar [data]="myEvents" [view]="calView" [headerTemplate]="customTemplate">
         <ng-template #customTemplate>
@@ -45,8 +50,13 @@ setOptions({
         </ng-template>
       </mbsc-eventcalendar>
     </div>
+    </mat-card-content>
+  </mat-card>
   `,
   styles: [`
+    .user-card {
+      margin-bottom: 16px;
+    }
     .md-switching-view-cont .mbsc-segmented {
       max-width: 350px;
       margin: 0 auto;
