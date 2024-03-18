@@ -27,7 +27,6 @@ func main() {
 	}
 
 	client := client.GetClient(config)
-
 	srv, err := calendar.NewService(ctx, option.WithHTTPClient(client))
 	if err != nil {
 		log.Fatalf("Unable to retrieve Calendar client: %v", err)
