@@ -12,3 +12,7 @@ backend/.idea/
 backend/calendar_service/.idea/
 
 *.json
+
+frontend/environment.ts
+
+frontend/src/app/environment.ts
