@@ -31,6 +31,10 @@ import { DatePipe, NgForOf } from '@angular/common'
 
   `]
 })
+
+/*Данный компонент отвечает за работу, списка событий которые отражаются в календаре
+* TODO:@ViewCalendarEventComponent,@CalendarComponent
+* */
 export class ViewCalendarEventComponent {
 
 }
