@@ -24,3 +24,4 @@ func GetTokenFromWeb(config *oauth2.Config) *oauth2.Token {
 	}
 	return tok
 }
+

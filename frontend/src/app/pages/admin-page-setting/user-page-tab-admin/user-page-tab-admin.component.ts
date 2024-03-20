@@ -239,7 +239,6 @@ export class UserPageTabAdminComponent implements OnInit {
   //Обновление данных пользователя и последующее обновление талицы
   openEditForm(data: any) {
     console.log('Data before opening EditUserAdminComponent:', data)
-
     const dialogRef = this._dialog.open(EditUserAdminComponent, {
       data: {
         user_id: data.id,
@@ -253,7 +252,6 @@ export class UserPageTabAdminComponent implements OnInit {
       height: '500px'
     });
   }
-
 
   //Информационное окно пользователя
   openInfoForm(data: any) {

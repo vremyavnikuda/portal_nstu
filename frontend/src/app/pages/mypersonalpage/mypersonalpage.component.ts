@@ -12,10 +12,10 @@ import { UserPersonalPagePortalComponent } from './user-personal-page-portal/use
     UserPersonalPagePortalComponent
   ],
   template: `
-      <ng-container>
-        <app-user-personal-page-portal></app-user-personal-page-portal>
-          <router-outlet></router-outlet>
-      </ng-container>
+    <ng-container>
+      <app-user-personal-page-portal></app-user-personal-page-portal>
+      <router-outlet></router-outlet>
+    </ng-container>
 
   `,
   styles: [`

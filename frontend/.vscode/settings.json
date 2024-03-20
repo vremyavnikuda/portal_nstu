@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
         "mobiscroll"
+    ],
+    "github-actions.workflows.pinned.workflows": [
+        "c:\\repository\\portal_nstu\\.github\\workflows\\backend.yml",
+        "c:\\repository\\portal_nstu\\.github\\workflows\\build_prod.yml"
     ]
 }
