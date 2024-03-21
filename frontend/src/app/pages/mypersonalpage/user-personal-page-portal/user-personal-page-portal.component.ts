@@ -68,6 +68,12 @@ import { MatButton } from '@angular/material/button'
         </button>
       </div>
     </div>
+    <div>
+      <button mat-button (click)="openStudentLogBook()">
+        Журнал успеваемости
+      </button>
+    </div>
+    
 
   `,
   styles: [`
