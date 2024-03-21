@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { LandingComponent } from '../../landing/landing.component';
-import { MatCard, MatCardContent } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardImage,
+  MatCardModule
+} from '@angular/material/card'
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { EditUserAdminComponent } from '../../admin-page-setting/user-page-tab-admin/edit-user-admin/edit-user-admin.component';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentLogBookComponent } from '../student-log-book/student-log-book.component';
+import { MatButton } from '@angular/material/button'
 
 @Component({
   selector: 'app-user-personal-page-portal',
@@ -16,21 +24,77 @@ import { StudentLogBookComponent } from '../student-log-book/student-log-book.co
     MatGridList,
     MatGridTile,
     EditUserAdminComponent,
-    StudentLogBookComponent
+    StudentLogBookComponent,
+    MatButton,
+    MatCardHeader,
+    MatCardActions,
+    MatCardImage,
+    MatCardModule
   ],providers: [
     StudentLogBookComponent
   ],
   template: `
-    <p>DEV</p>
-    <div>
-      <button mat-raised-button color="primary" (click)="openStudentLogBook()">
-        Журнал успеваемости
-      </button>
+    <div class="user-personal-page">
+      <div class="user-info">
+        <img class="user-photo" src="фото" alt="user photo">
+        <p>Андрей</p>
+        <p>Невский</p>
+      </div>
+
+      <div class="user-cards">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Успеваемость</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Средний балл: </p>
+            <p>Количество пройденных курсов: </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Контактная информация</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Email: </p>
+            <p>Телефон: </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="user-actions">
+        <button mat-button>
+          Редактировать профиль
+        </button>
+      </div>
     </div>
+
   `,
   styles: [`
+      .user-personal-page {
+          display: flex;
+          flex-direction: row;
+      }
 
+      .user-info {
+          margin-right: 20px;
+          width: 200px;
+          text-align: center;
+      }
 
+      .user-cards {
+          flex: 1;
+      }
+
+      .user-actions {
+          margin-top: 20px;
+      }
+      .user-photo {
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          margin-bottom: 20px;
+      }
   `],
 })
 /*

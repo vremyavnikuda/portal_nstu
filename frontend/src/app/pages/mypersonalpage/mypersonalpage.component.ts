@@ -13,7 +13,9 @@ import { UserPersonalPagePortalComponent } from './user-personal-page-portal/use
   ],
   template: `
     <ng-container>
-      <app-user-personal-page-portal></app-user-personal-page-portal>
+      <app-user-personal-page-portal>
+        
+      </app-user-personal-page-portal>
       <router-outlet></router-outlet>
     </ng-container>
 
@@ -32,6 +34,7 @@ import { UserPersonalPagePortalComponent } from './user-personal-page-portal/use
     }
     `]
 })
+
 export class MypersonalpageComponent {
 
 }

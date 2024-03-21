@@ -27,15 +27,16 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCard } from '@angular/material/card'
 
-export interface PeriodicElement {
+export interface DisciplinesElement {
   name: string;
   position: number;
   weight: number;
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const DISCIPLINES_DATA: DisciplinesElement[] = [
   { position: 1, name: 'Иностранный язык', weight: 90, symbol: '5' },
   { position: 2, name: 'Информатика', weight: 87, symbol: '5' },
   { position: 3, name: 'История России', weight: 77, symbol: '4' },
@@ -78,48 +79,52 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatHeaderRowDef,
     MatRowDef,
     MatRow,
-    MatHeaderRow
+    MatHeaderRow,
+    MatCard
   ],
   template: `
-    <p>student-log-book works!</p>
-    <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-      </ng-container>
+    <div class="text">
+      <h2>Журнал успеваемости студента</h2>
+    </div>
+    <mat-card >
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Предмет</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Предмет</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef>Кол-во баллов</th>
-        <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-      </ng-container>
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef>Кол-во баллов</th>
+          <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+        </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef>Оценка</th>
-        <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
-      </ng-container>
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef>Оценка</th>
+          <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </mat-card>
   `,
   styles: [
     `
       table {
         width: 100%;
       }
+      .text{
+          text-align: center;
+      }
     `,
   ],
 })
 export class StudentLogBookComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
+  dataSource = DISCIPLINES_DATA;
 }
