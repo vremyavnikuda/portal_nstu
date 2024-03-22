@@ -13,6 +13,9 @@ import { EditUserAdminComponent } from '../../admin-page-setting/user-page-tab-a
 import { MatDialog } from '@angular/material/dialog';
 import { StudentLogBookComponent } from '../student-log-book/student-log-book.component';
 import { MatButton } from '@angular/material/button'
+import { AuthenticationService } from '../../../services/authentication.service'
+import { HttpClient } from '@angular/common/http'
+import { Emitters } from '../../../emitters/emitters'
 
 @Component({
   selector: 'app-user-personal-page-portal',
@@ -35,13 +38,26 @@ import { MatButton } from '@angular/material/button'
   ],
   template: `
     <div class="user-personal-page">
-      <div class="user-info">
-        <img class="user-photo" src="фото" alt="user photo">
-        <p>Андрей</p>
-        <p>Невский</p>
-      </div>
+
+      <mat-card-content>
+        <div class="user-info">
+          <img class="user-photo" src="/assets/img.jpg" alt="user-photo">
+        </div>
+      </mat-card-content>
 
       <div class="user-cards">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Информация</mat-card-title>
+          </mat-card-header>
+            <mat-card-content>
+              <p>{{currentUserRole}}</p>
+              <p>ФИО: {{ currentUser }}</p>
+              <p>Факультет: </p>
+              <p>Группа: </p>
+            </mat-card-content>
+        </mat-card>
+        
         <mat-card>
           <mat-card-header>
             <mat-card-title>Успеваемость</mat-card-title>
@@ -51,6 +67,7 @@ import { MatButton } from '@angular/material/button'
             <p>Количество пройденных курсов: </p>
           </mat-card-content>
         </mat-card>
+        
         <mat-card>
           <mat-card-header>
             <mat-card-title>Контактная информация</mat-card-title>
@@ -60,6 +77,7 @@ import { MatButton } from '@angular/material/button'
             <p>Телефон: </p>
           </mat-card-content>
         </mat-card>
+        
       </div>
 
       <div class="user-actions">
@@ -73,7 +91,6 @@ import { MatButton } from '@angular/material/button'
         Журнал успеваемости
       </button>
     </div>
-    
 
   `,
   styles: [`
@@ -96,21 +113,36 @@ import { MatButton } from '@angular/material/button'
           margin-top: 20px;
       }
       .user-photo {
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          margin-bottom: 20px;
+          width: auto;
+          height: auto;
       }
   `],
 })
 /*
-*Проработать профиль студента
-*добавить необходимые данные
+TODO: @UserPersonalPagePortalComponent  -> компонент для работы с личной информацией о пользователе
 *
 */
 export class UserPersonalPagePortalComponent implements OnInit {
-  constructor(private _dialog: MatDialog) {}
-  ngOnInit() {}
+  currentUser:any;
+  currentUserRole :any;
+  constructor(
+    private _dialog: MatDialog,
+    private _authService: AuthenticationService,
+    private _http: HttpClient
+  ) {}
+  ngOnInit() {
+    this._http.get('http://localhost:8000/api/user',{withCredentials:true}).subscribe(
+      (res:any) =>{
+        this.currentUser = `${res.last_name} ${res.first_name} ${res.middle_name}`;
+        this.currentUserRole=`${res.role}`
+        Emitters.authEmitter.emit(true);
+      },
+      err => {
+        this.currentUser = 'You are not logged in';
+        Emitters.authEmitter.emit(false);
+      }
+    )
+  }
 
   // TODO: Открытие модального окна журнала успеваемости студента
   openStudentLogBook() {
