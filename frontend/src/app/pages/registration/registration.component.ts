@@ -42,7 +42,7 @@ import {MatNativeDateModule} from "@angular/material/core";
         margin-top: 80px;
       }
     `],
-    template: `
+     template: `
         <div class="content">
             <router-outlet></router-outlet>
         </div>
