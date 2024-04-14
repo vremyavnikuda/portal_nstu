@@ -79,12 +79,12 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         </div>
     `,
     styles: [`
-      
+
       .element-3{
         position: relative;
         left: 80%;
       }
-      
+
       spacer {
         margin-bottom: 20px;
       }
