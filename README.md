@@ -1,4 +1,13 @@
 # NSTU
+```Actionscript
+cd .../frontend
+```
+```Actionscript
+npm install -g
+```
+```Bash
+ng serve
+```
 ## Структура проекта
 ~~~
 portal_nstu/
