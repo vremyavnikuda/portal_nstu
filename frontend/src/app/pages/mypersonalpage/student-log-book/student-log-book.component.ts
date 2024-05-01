@@ -113,6 +113,7 @@ const DISCIPLINES_DATA: DisciplinesElement[] = [
       </table>
     </mat-card>
   `,
+
   styles: [
     `
       table {
