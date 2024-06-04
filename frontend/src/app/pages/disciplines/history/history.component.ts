@@ -56,6 +56,7 @@ import {Component} from "@angular/core";
                 </div>
                 <mat-divider></mat-divider>
             </div>
+            
             <div class="footer">
                 <div>
                     <p>Факультеты и специальности</p>
