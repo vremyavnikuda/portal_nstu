@@ -46,6 +46,8 @@ import {FullCalendarModule} from "@fullcalendar/angular";
     ],
     providers: [Notifications, ViewCalendarEventComponent],
 })
+
+//Страница расписания
 export class ScheduleComponent {
 
 }
