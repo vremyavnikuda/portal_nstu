@@ -25,10 +25,6 @@ import {PhysicalEducationSportComponent} from "./physical-education-sport/physic
   ],
   template: `
       <div style="padding: 16px">
-          <p>
-              Страница для отображение дисциплин факультета
-          </p>
-
           <div class="spacer">
               <mat-accordion>
 

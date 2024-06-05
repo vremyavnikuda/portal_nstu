@@ -48,5 +48,5 @@ import { BrowserModule } from '@angular/platform-browser'
 
 })
 export class AppComponent {
-    title = 'NSTU Student Portal';
+    title = 'Portal';
 }

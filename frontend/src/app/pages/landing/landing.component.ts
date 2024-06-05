@@ -38,7 +38,7 @@ import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/mat
               (click)="callapsed.set(!callapsed())">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Student Portal NSTU </span>
+      <span>Portal</span>
       <span class="example-spacer"></span>
 
       <div *ngIf="menuVisibility">

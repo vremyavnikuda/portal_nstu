@@ -33,7 +33,6 @@ import { MatTableDataSource } from '@angular/material/table'
         MygroupComponent
     ],
     template: `
-      {{ message }}
       <app-landing></app-landing>
     `,
     styles: [`
