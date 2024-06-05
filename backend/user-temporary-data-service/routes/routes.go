@@ -22,5 +22,6 @@ func Setup(app *fiber.App) {
 	//POST -> отправить запросы
 	app.Delete("/api/user-temporary-data/deleteUserTemporaryData/:id", controller.DeleteUserTemporaryData)
 	app.Post("api/user-temporary-data/addUserDataRegistration", controller.AddUserDataRegistration)
-
+	//Получение формы обратной связи с портала
+	app.Post("api/user-temporary-data/postHandleProposal", controller.HandleProposal)
 }

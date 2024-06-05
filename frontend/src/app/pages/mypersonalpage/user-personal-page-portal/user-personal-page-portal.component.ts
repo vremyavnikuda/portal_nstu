@@ -70,7 +70,7 @@ import { Emitters } from '../../../emitters/emitters';
         </mat-card-header>
         <mat-card-content>
           <p>Email: {{ emailUser }}</p>
-          <p>Телефон: {{studentPhoneNumber}}</p>
+          <p>Телефон: {{ studentPhoneNumber }}</p>
         </mat-card-content>
       </mat-card>
     </div>
@@ -153,14 +153,21 @@ export class UserPersonalPagePortalComponent implements OnInit {
 
   //TODO:Получение информации о факультете для конкретного студента
   getInfoStudentFacultyService() {
-    this._http.get('', { withCredentials: true }).subscribe(
-      (res: any) => {
-        this.currentFaculty = `${res.faculty}`;
-      },
-      (err: any) => {
-        this.currentFaculty = ' Факультет не установлен';
-      }
-    );
+    this._http
+      .get(
+        'http://localhost:8080/api/get/facultyService/getFacultyInfoStudent',
+        {
+          withCredentials: true,
+        }
+      )
+      .subscribe(
+        (res: any) => {
+          this.currentFaculty = `${res.faculty}`;
+        },
+        (err: any) => {
+          this.currentFaculty = ' Факультет не установлен';
+        }
+      );
   }
 
   //TODO:Получение информации о группе для конкретного студента
@@ -174,7 +181,6 @@ export class UserPersonalPagePortalComponent implements OnInit {
       }
     );
   }
-
 
   //TODO: Получение информации о пройденных курсах
   getInfoStudentProcessService() {

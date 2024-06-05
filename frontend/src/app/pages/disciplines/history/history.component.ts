@@ -56,7 +56,7 @@ import {Component} from "@angular/core";
                 </div>
                 <mat-divider></mat-divider>
             </div>
-            
+
             <div class="footer">
                 <div>
                     <p>Факультеты и специальности</p>
@@ -112,6 +112,7 @@ import {Component} from "@angular/core";
         }
     `],
 })
+
 export class HistoryComponent {
     constructor(public dialog: MatDialog) {}
 

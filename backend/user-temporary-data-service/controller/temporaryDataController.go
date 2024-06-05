@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"github.com/pterm/pterm"
 	"strconv"
 	"time"
 	"user-temporary-data-service/database"
 	"user-temporary-data-service/models"
+
+	"github.com/pterm/pterm"
 
 	"github.com/gofiber/fiber/v2"
 )
