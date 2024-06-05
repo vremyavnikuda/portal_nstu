@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 )
 
+// HandleProposal -> получение формы обратной связи с портала
+// и обработка на стороне сервера.
 func HandleProposal(c *fiber.Ctx) error {
 	form, err := c.MultipartForm()
 	if err != nil {
