@@ -144,7 +144,7 @@ export class UserPersonalPagePortalComponent implements OnInit {
     const dialogRef = this._dialog.open(StudentLogBookComponent, {
       /*Тут реализуется логика получения данных из журнала успеваемости конкретного студента
       под которым авторизовался пользователь.
-      Этого api пока что нет !!!
+      TODO:Этого api пока что нет !!!
       */
       width: '1000px',
       height: '600px',

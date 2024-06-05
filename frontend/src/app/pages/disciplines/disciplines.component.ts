@@ -238,6 +238,7 @@ import {FormsModule} from "@angular/forms";
   ],
 })
 export class DisciplinesComponent {
+  //TODO: Данный массив отвечает за семестры студента
   semesters = [1, 2, 3, 4, 5, 6, 7, 8];
   selectedSemester = 1;
   panelOpenState = false;

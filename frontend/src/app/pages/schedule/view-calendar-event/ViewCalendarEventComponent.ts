@@ -40,6 +40,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 /*Данный компонент отвечает за работу, списка событий которые отражаются в календаре
  * TODO:@ViewCalendarEventComponent
+ *  разработать компонент который будет отвечать за (создание события,удаления события,обновление события,редактирования события)
  * */
 export class ViewCalendarEventComponent {
   calendarOptions: CalendarOptions = {
@@ -47,7 +48,7 @@ export class ViewCalendarEventComponent {
     initialView: 'dayGridMonth',
     weekends: true,
 
-    //TODO:расписание событий в календаре
+    //TODO:расписание событий в календаре (без взаимодействия с ними (статичны))
     //title: 'название события', start: (время события)'2024-06-07T19:00:00'
     events: [
       { title: 'Подведение итогов', start: '2024-06-07T19:00:00' },
