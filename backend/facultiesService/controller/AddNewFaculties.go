@@ -12,7 +12,7 @@ func AddNewFaculties(context *fiber.Ctx) error {
 	var requestData map[string]interface{}
 	if err := context.BodyParser(&requestData); err != nil {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Failed to parse request body",
+			"error": "Не удалось проанализировать тело запроса.",
 		})
 	}
 
@@ -21,7 +21,7 @@ func AddNewFaculties(context *fiber.Ctx) error {
 	reductionName, reductionNameOk := requestData["reduction_faculty_name"].(string)
 	if !nameOk || !reductionNameOk {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid input data",
+			"error": "Неверные входные данные",
 		})
 	}
 
@@ -36,17 +36,17 @@ func AddNewFaculties(context *fiber.Ctx) error {
 		// Проверь, не связана ли ошибка с повторяющимся именем сокращения.
 		if database.DB.Where("reduction_faculty_name = ?", reductionName).First(&models.Faculty{}).Error == nil {
 			return context.Status(fiber.StatusConflict).JSON(fiber.Map{
-				"error": "Reduction faculty name already exists",
+				"error": "Название факультета : сокращения уже существует",
 			})
 		}
 		return context.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to create faculty",
+			"error": "Не удалось создать факультет.",
 		})
 	}
 
 	// Вернуть успешный ответ
 	return context.JSON(fiber.Map{
-		"message": "Faculty created successfully",
+		"message": "Факультет создан успешно",
 		"faculty": faculty,
 	})
 }

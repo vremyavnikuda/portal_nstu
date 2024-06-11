@@ -19,7 +19,7 @@ func AddNewGroup(context *fiber.Ctx) error {
 	var requestData map[string]interface{}
 	if err := context.BodyParser(&requestData); err != nil {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Failed to parse request body",
+			"error": "Не удалось проанализировать тело запроса.",
 		})
 	}
 
@@ -27,7 +27,7 @@ func AddNewGroup(context *fiber.Ctx) error {
 	reductionFacultyName, ok := requestData["reduction_faculty_name"].(string)
 	if !ok || reductionFacultyName == "" {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid or missing reduction_faculty_name",
+			"error": "Недействителен или отсутствует: reduction_faculty_name",
 		})
 	}
 
@@ -36,11 +36,11 @@ func AddNewGroup(context *fiber.Ctx) error {
 	if err := database.DB.Where("reduction_faculty_name = ?", reductionFacultyName).First(&faculty).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return context.Status(fiber.StatusNotFound).JSON(fiber.Map{
-				"error": "Faculty not found",
+				"error": "Факультет не найден",
 			})
 		}
 		return context.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to query faculty",
+			"error": "Не удалось запросить факультет",
 		})
 	}
 
@@ -48,7 +48,7 @@ func AddNewGroup(context *fiber.Ctx) error {
 	groupName, ok := requestData["name"].(string)
 	if !ok || groupName == "" {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid or missing group name",
+			"error": "Неверное или отсутствующее имя группы.",
 		})
 	}
 
@@ -61,13 +61,13 @@ func AddNewGroup(context *fiber.Ctx) error {
 	// Сохраните новую группу в базе данных.
 	if err := database.DB.Create(&group).Error; err != nil {
 		return context.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to create group",
+			"error": "Не удалось создать группу",
 		})
 	}
 
 	// Вернуть успешный ответ
 	return context.JSON(fiber.Map{
-		"message": "Group created successfully",
+		"message": "Группа успешно создана",
 		"group":   group,
 	})
 }

@@ -13,10 +13,10 @@ func GetAllFaculties(context *fiber.Ctx) error {
 	// Запросить базу данных, чтобы найти все факультеты
 	if err := database.DB.Preload("Groups").Find(&faculties).Error; err != nil {
 		// Зарегистрировать ошибку
-		pterm.Error.Printfln("Failed to retrieve faculties: %v", err)
+		pterm.Error.Printfln("Не удалось получить факультеты.: %v", err)
 		// Возвращает статус внутренней ошибки сервера 500 с сообщением об ошибке.
 		return context.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to retrieve faculties",
+			"error": "Не удалось получить факультеты.",
 		})
 	}
 
@@ -25,7 +25,7 @@ func GetAllFaculties(context *fiber.Ctx) error {
 
 	// Верните факультеты в виде ответа JSON.
 	return context.JSON(fiber.Map{
-		"message":   "Faculties retrieved successfully",
+		"message":   "Факультеты успешно восстановлены",
 		"faculties": faculties,
 	})
 }
