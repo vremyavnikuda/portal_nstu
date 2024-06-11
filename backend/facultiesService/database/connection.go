@@ -16,14 +16,14 @@ var DB *gorm.DB
 func Connect() {
 	wd, err := os.Getwd()
 	if err != nil {
-		pterm.Fatal.Printfln("Error getting working directory: %v", err)
+		pterm.Fatal.Printfln("Ошибка получения рабочего каталога: %v", err)
 	}
 
 	envPath := filepath.Join(wd, ".env")
 
 	err = godotenv.Load(envPath)
 	if err != nil {
-		pterm.Fatal.Printfln("Error loading .env file: %v", err)
+		pterm.Fatal.Printfln("Ошибка загрузки файла .env.: %v", err)
 	}
 
 	dbHost := os.Getenv("DB_HOST")
@@ -37,14 +37,14 @@ func Connect() {
 	//Подключение к базе данных postgres
 	connection, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		fmt.Println("Cloud not connect to the database")
+		fmt.Println("Облако не подключается к базе данных")
 		return
 	}
 
 	pterm.Debug.Printfln("DSN: %s", dsn)
 	DB = connection
-	err = connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{})
+	err = connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{},&models.Users{})
 	if err != nil {
-		pterm.Fatal.Printfln("Error migrating database:  %v", err)
+		pterm.Fatal.Printfln("Ошибка переноса базы данных:  %v", err)
 	}
 }

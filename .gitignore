@@ -18,3 +18,7 @@ frontend/environment.ts
 frontend/src/app/environment.ts
 
 frontend/.vscode/
+
+backend/user-temporary-data-service/uploads/
+
+backend/facultiesService/.idea/
