@@ -1,22 +1,29 @@
 package models
 
+// Faculty структура представляет факультет
 type Faculty struct {
-	UserID               uint `gorm:"primary key"`
+	ID                   uint   `gorm:"primaryKey"`
 	Name                 string
 	ReductionFacultyName string `gorm:"unique"`
+	Groups               []Group `gorm:"foreignKey:FacultyID"`
 }
 
+// Group структура представляет группу
 type Group struct {
-	UserID               uint `gorm:"primary key"`
+	ID                   uint   `gorm:"primaryKey"`
+	// Внешний ключ для связи с Faculty
+	FacultyID            uint   `gorm:"index"`
 	Name                 string
-	ReductionFacultyName string `gorm:"ForeignKey:ReductionFacultyName"`
+	Students             []Student `gorm:"foreignKey:GroupID"`
 }
 
+// Student структура представляет студента
 type Student struct {
-	UserID   uint   `json:"UserID"`
-	FullName string `json:"FullName"`
-	GroupId  uint   `gorm:"ForeignKey:GroupRefer"`
-	Status   string
+	ID       uint `gorm:"primaryKey"`
+	FullName string
+	// Внешний ключ для связи с Group
+	GroupID uint `gorm:"index"`
+	Status  string
 }
 
 type FacultyData struct {

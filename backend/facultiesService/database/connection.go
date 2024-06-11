@@ -43,5 +43,8 @@ func Connect() {
 
 	pterm.Debug.Printfln("DSN: %s", dsn)
 	DB = connection
-	connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{})
+	err = connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{})
+	if err != nil {
+		pterm.Fatal.Printfln("Error migrating database:  %v", err)
+	}
 }

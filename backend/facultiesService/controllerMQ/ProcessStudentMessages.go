@@ -59,7 +59,6 @@ func ProcessStudentMessages(stopCh <-chan struct{}) error {
 				}
 				fmt.Println("Received a message:", string(d.Body))
 
-				// Проверяем, что сообщение не пустое
 				if len(d.Body) == 0 {
 					pterm.Info.Printfln("Received empty message. Skipping.")
 					continue
@@ -67,32 +66,28 @@ func ProcessStudentMessages(stopCh <-chan struct{}) error {
 
 				var studentMessage StudentMessage
 				if err := json.Unmarshal(d.Body, &studentMessage); err != nil {
-					pterm.Fatal.Printfln("Failed to unmarshal message: %v", err)
+					pterm.Error.Printfln("Failed to unmarshal message: %v", err)
 					continue
 				}
 				log.Println("Received student:", studentMessage)
 
-				// Проверяем, существует ли такой пользователь в базе данных
 				var existingStudent models.Student
 				if err := database.DB.Where("user_id = ?", studentMessage.UserID).First(&existingStudent).Error; err != nil {
-					if !errors.Is(err, gorm.ErrRecordNotFound) {
-						pterm.Fatal.Printfln("Failed to query database: %v", err)
-						continue
-					}
-					// Пользователь не найден, добавляем его в базу данных
-					student := models.Student{
-						UserID:   uint(studentMessage.UserID),
-						FullName: studentMessage.FullName,
-					}
+					if errors.Is(err, gorm.ErrRecordNotFound) {
+						student := models.Student{
+							ID:   uint(studentMessage.UserID),
+							FullName: studentMessage.FullName,
+						}
 
-					result := database.DB.Create(&student)
-					if result.Error != nil {
-						pterm.Fatal.Printfln("Failed to add student to database: %v", result.Error)
-						continue
+						if err := database.DB.Create(&student).Error; err != nil {
+							pterm.Error.Printfln("Failed to add student to database: %v", err)
+							continue
+						}
+						log.Println("Student added to database:", student)
+					} else {
+						pterm.Error.Printfln("Failed to query database: %v", err)
 					}
-					log.Println("Student added to database:", student)
 				} else {
-					// Пользователь найден, можно выполнить дополнительные действия, например, обновить существующую запись
 					log.Println("Student already exists in the database:", existingStudent)
 				}
 			}
@@ -101,6 +96,5 @@ func ProcessStudentMessages(stopCh <-chan struct{}) error {
 
 	pterm.Info.Printfln(" [*] Waiting for messages. To exit press CTRL+C")
 	<-doneCh
-	_ = rabbitMQ.Close()
 	return nil
 }
