@@ -107,7 +107,7 @@ export class LoginPageComponent implements OnInit {
     //TODO: обработчик события нажатия на кнопку (@регистрация) -> /registration
     // @goToregistrationPage()
     goToRegistrationPage() {
-        this.router.navigate(["registration"])
+        this.router.navigate(["/registration"]).then(r => true)
         console.log("goToRegistrationPage() -> пользователь перенаправлен на endpoint /registration")
     }
 }

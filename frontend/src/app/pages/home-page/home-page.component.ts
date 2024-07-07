@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {MatButton, MatButtonModule} from '@angular/material/button';
+import {Router} from '@angular/router';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {MainComponent} from "../main/main.component";
 
 /** Home page component.
  * Это будет основная страница приложения
  *
  * */
+
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [MatButton, HttpClientModule],
+  imports: [MatButtonModule, HttpClientModule],
   template: `
     <p>home-page works!</p>
     <p>endpoint: "/"</p>
@@ -28,8 +30,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {}
 
-  //редирект на /main
   goToMainPage() {
-    this.router.navigate(['/main']).then((r) => true);
+    this.router.navigate(['main']).then((r) => false);
+    console.log('goToMainPage() -> пользователь перенаправлен на endpoint /main');
   }
 }
