@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,17 +12,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^17.0.8",
+    "@angular/animations": "^17.3.11",
     "@angular/cdk": "^17.0.4",
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.8",
     "@angular/core": "^17.3.2",
-    "@angular/fire": "^17.0.1",
+    "@angular/fire": "^17.1.0",
     "@angular/forms": "^17.0.0",
     "@angular/material": "^17.3.2",
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.8",
-    "@angular/router": "^17.0.0",
+    "@angular/router": "^17.3.11",
     "@fullcalendar/angular": "^6.1.14",
     "@fullcalendar/core": "^6.1.14",
     "@fullcalendar/daygrid": "^6.1.14",
@@ -38,6 +38,7 @@
     "d3": "^7.8.5",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.10",
+    "firebase": "^10.12.3",
     "gojs": "^2.3.13",
     "googleapis": "^134.0.0",
     "material-icons": "^1.13.12",
@@ -61,5 +62,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.2.2"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

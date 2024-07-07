@@ -17,21 +17,19 @@ func SetupAPI(app *fiber.App) {
 		return controller.AddNewGroup(ctx)
 	})
 	//API : добавить пользователя в базу данных студентов
-	app.Post("/api/get/facultyService/AddUserInStudents/:id",controller.AddUserInStudents)
+	app.Post("/api/get/facultyService/AddUserInStudents/:id", controller.AddUserInStudents)
 
 	//Удаление студента из базы данных студентов
-	app.Post("/api/get/facultyService/RemoveStudentFromGroup/:id",controller.RemoveStudentFromGroup)
+	app.Post("/api/get/facultyService/RemoveStudentFromGroup/:id", controller.RemoveStudentFromGroup)
 
 	//API: получить все факультеты
 	app.Get("/api/get/facultyService/getAllFaculties", controller.GetAllFaculties)
 	app.Get("/api/get/facultyService/getAllGroups", controller.GetAllGroups)
 
 	//API: Отравляем данные о факультете студента на api
-	app.Get("/api/get/facultyService/getFacultyInfoStudent", controller.GetFacultyInfoStudent)
 
 	//API:Отобразить всех студентов
-	app.Get("/api/get/facultyService/GetAllStudents",controller.GetAllStudents)
-
+	app.Get("/api/get/facultyService/GetAllStudents", controller.GetAllStudents)
 
 	//TODO: API: GetFacultyInfoStudent -> api для получения информации о факультете,группы студента
 
