@@ -12,6 +12,7 @@ import (
 	pb "sso-portal/gen/go/sso"
 	"sso-portal/internal/config"
 	sAPI "sso-portal/internal/grpc/auth"
+	"sso-portal/internal/migrate"
 )
 
 const (
@@ -20,29 +21,30 @@ const (
 	envProd  = "prod"
 )
 
-// TODO:Это main является точкой входа в grpc
 func main() {
-	//TODO:Написать объект конфига
+	//Написать объект конфига
 	//подключаем конфиг
 	cfg := config.MustLoad()
 
 	//подключаем базу данных
 	db.Connect(cfg.Postgres)
 
-	//TODO:инициализировать логгер
+	//инициализировать логгер
 	setupLogger(cfg.Env)
+	//Выполняем миграцию
+	migrate.Migrate()
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", cfg.GRPC.Port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatalf("Failed to listen: %v", err)
 	}
 
 	s := grpc.NewServer()
 	pb.RegisterUserServiceServer(s, &sAPI.ServerAPI{})
 	reflection.Register(s)
-	log.Printf("server listening at %v", lis.Addr())
+	log.Printf("Server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		log.Fatalf("Failed to serve: %v", err)
 	}
 }
 

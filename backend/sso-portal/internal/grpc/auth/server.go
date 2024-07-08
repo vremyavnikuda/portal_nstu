@@ -65,6 +65,7 @@ func (s *ServerAPI) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginR
 		return nil, fmt.Errorf("incorrect password")
 	}
 
+	//TODO:Доработать логику генерации токен jwt
 	// Generate token (for simplicity, we use a dummy token here)
 	token := "dummy-token"
 

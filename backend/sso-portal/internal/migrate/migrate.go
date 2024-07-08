@@ -6,19 +6,19 @@ import (
 	db2 "sso-portal/cmd/db"
 )
 
-// Migrate TODO: Это миграция
+// Migrate Это миграция goose
 func Migrate() {
 	db, err := db2.DB.DB()
 	if err != nil {
-		pterm.Error.Printfln("failed to connect to database: %v", err)
+		pterm.Error.Printfln("Failed to connect to database: %v", err)
 	}
 	if err := goose.SetDialect("postgres"); err != nil {
-		pterm.Error.Printfln("failed to set dialect: %v", err)
+		pterm.Error.Printfln("Failed to set dialect: %v", err)
 	}
 
 	if err := goose.Up(db, "cmd/db/migrations"); err != nil {
-		panic(err)
+		pterm.Fatal.Sprintfln("Failed to run migrations: %v", err)
 	}
 
-	pterm.Info.Println("database migrated successfully")
+	pterm.Info.Println("Database migrated successfully")
 }

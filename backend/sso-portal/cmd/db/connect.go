@@ -16,7 +16,7 @@ func Connect(cfg config.PostgresConfig) {
 	var err error
 	DB, err = gorm.Open(postgres.Open(dns), &gorm.Config{})
 	if err != nil {
-		pterm.Fatal.Printf("failed to connect to database: %v\n", err)
+		pterm.Fatal.Printf("Failed to connect to database: %v\n", err)
 	}
-	pterm.Info.Println("connected to database")
+	pterm.Info.Println("Connected to database")
 }
