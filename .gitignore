@@ -22,3 +22,13 @@ frontend/.vscode/
 backend/user-temporary-data-service/uploads/
 
 backend/facultiesService/.idea/
+
+backend/Taskfile.yaml
+
+backend/sso-portal/.idea/
+
+backend/sso-portal/config/local_tests.yml
+
+backend/sso-portal/config/local.yml
+
+backend/sso-portal/config/prod.yml
