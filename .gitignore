@@ -32,3 +32,5 @@ backend/sso-portal/config/local_tests.yml
 backend/sso-portal/config/local.yml
 
 backend/sso-portal/config/prod.yml
+
+backend/sso-portal/backup/
