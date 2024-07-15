@@ -12,10 +12,7 @@ func main() {
 
 	app := fiber.New()
 
-	/**TODO:
-	при локальной разработке port = 8001
-	при деплое в продакшэн заменить на port = 8082
-	*/
+	//TODO:
 	const port string = ":8001"
 	title := "user_temporary_data_service"
 	database.Connect()

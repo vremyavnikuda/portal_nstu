@@ -8,20 +8,12 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"os"
-	"path/filepath"
 )
 
 var DB *gorm.DB
 
 func Connect() {
-	wd, err := os.Getwd()
-	if err != nil {
-		pterm.Fatal.Printfln("Ошибка получения рабочего каталога: %v", err)
-	}
-
-	envPath := filepath.Join(wd, ".env")
-
-	err = godotenv.Load(envPath)
+	err := godotenv.Load()
 	if err != nil {
 		pterm.Fatal.Printfln("Ошибка загрузки файла .env.: %v", err)
 	}
@@ -43,7 +35,7 @@ func Connect() {
 
 	pterm.Debug.Printfln("DSN: %s", dsn)
 	DB = connection
-	err = connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{},&models.Users{})
+	err = connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{}, &models.Users{})
 	if err != nil {
 		pterm.Fatal.Printfln("Ошибка переноса базы данных:  %v", err)
 	}

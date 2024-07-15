@@ -36,3 +36,7 @@ backend/sso-portal/backup/
 .idea/
 
 .vscode/
+
+backend/.task/
+
+backend/sso-portal/
