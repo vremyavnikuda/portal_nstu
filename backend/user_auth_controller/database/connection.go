@@ -15,10 +15,7 @@ var DB *gorm.DB
 
 func Connect() {
 	// Load the .env file
-	err := godotenv.Load()
-	if err != nil {
-		pterm.Fatal.Printf("Ошибка загрузки файла .env.: %v", err)
-	}
+	godotenv.Load()
 
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
@@ -37,8 +34,5 @@ func Connect() {
 
 	pterm.Debug.Printfln("DSN: %s", dsn)
 	DB = connection
-	err = connection.AutoMigrate(&models.Users{})
-	if err != nil {
-		pterm.Fatal.Printfln("Неустранимая ошибка во время миграции: %v", err)
-	}
+	connection.AutoMigrate(&models.Users{})
 }

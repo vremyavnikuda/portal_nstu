@@ -13,10 +13,7 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	err := godotenv.Load()
-	if err != nil {
-		pterm.Fatal.Printfln("Ошибка загрузки файла .env.: %v", err)
-	}
+	godotenv.Load()
 
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
@@ -35,8 +32,5 @@ func Connect() {
 
 	pterm.Debug.Printfln("DSN: %s", dsn)
 	DB = connection
-	err = connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{}, &models.Users{})
-	if err != nil {
-		pterm.Fatal.Printfln("Ошибка переноса базы данных:  %v", err)
-	}
+	connection.AutoMigrate(&models.Faculty{}, &models.Group{}, &models.Student{}, &models.Users{})
 }

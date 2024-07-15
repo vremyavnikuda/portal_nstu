@@ -3,7 +3,6 @@ package database
 import (
 	"fmt"
 	"github.com/joho/godotenv"
-	"github.com/pterm/pterm"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"os"
@@ -14,10 +13,7 @@ var DB *gorm.DB
 
 func Connect() {
 	// Load the .env file
-	err := godotenv.Load()
-	if err != nil {
-		pterm.Fatal.Printfln("Ошибка загрузки файла .env.: %v", err)
-	}
+	godotenv.Load()
 
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
@@ -34,12 +30,6 @@ func Connect() {
 		fmt.Println("Облако не подключается к базе данных")
 		return
 	}
-
 	DB = connection
-
-	err = connection.AutoMigrate(&models.User_temporary_data{})
-	if err != nil {
-		pterm.Fatal.Printfln("Неустранимая ошибка во время миграции: %v", err)
-	}
-
+	connection.AutoMigrate(&models.User_temporary_data{})
 }
