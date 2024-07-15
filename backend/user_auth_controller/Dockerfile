@@ -1,35 +1,18 @@
-# Stage 1: Build the application
+# Stage 1: Build the Go application
 FROM golang:1.21-alpine AS builder
-LABEL authors="vremyavnikuda"
 
-WORKDIR /usr/local/src
+WORKDIR /app
 
-# Install necessary packages
-RUN apk --no-cache add bash git make gcc gettext musl-dev
+COPY . .
 
-# Copy only necessary files for downloading dependencies
-COPY ["go.mod", "go.sum", "./"]
-
-# Download dependencies
 RUN go mod download
-
-# Copy the entire project
-COPY [".", "./"]
-
-# Build the application
-RUN go build -o ./bin/user-auth-controller
+RUN go build -o main .
 
 # Stage 2: Create a minimal image for running the application
 FROM alpine:latest AS runner
 
 WORKDIR /usr/local/bin/
 
-# Copy the built application and .env file from the builder
-COPY --from=builder /usr/local/src/bin/user-auth-controller ./
-COPY --from=builder /usr/local/src/.env ./
+COPY --from=builder /app/main .
 
-# Expose the port used by the application
-EXPOSE 8000
-
-# Run the application
-CMD ["./user-auth-controller", "--env-file", "./.env"]
+CMD ["./main"]
