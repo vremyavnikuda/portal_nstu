@@ -8,13 +8,13 @@ use crate::service::port::port;
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    // Инициализация логгирования
+    // Инициализация логирования
     tracing_subscriber::fmt().with_target(false).compact().init();
 
     // Подключение к базе данных
     // flag_connect_database == false -> запрещено подключение к базе данных
     // flag_connect_database == true -> разрешено подключение к базе данных
-    let client_data_base = match connect_data_base(false).await {
+    match connect_data_base(true).await {
         Ok(client) => {
             println!("Successfully connected to the database");
             Some(client)
@@ -27,7 +27,7 @@ async fn main() -> Result<(), anyhow::Error> {
     };
 
     // Создание маршрутов и сервера
-    let app = route(client_data_base).await;
+    let app = route().await;
     let addr = port().await;
 
     // Запуск сервера
