@@ -1,18 +1,26 @@
 use std::sync::Arc;
-use dotenv::{dotenv, var};
-use tokio_postgres::{Client, NoTls, Error};
+use tokio_postgres::{Client, NoTls};
+use dotenv::dotenv;
+use std::env::var;
+use tokio::task;
+use anyhow::{Result, anyhow};
 
-pub(crate) async fn connect_data_base() -> Result<Arc<Client>, Error> {
+pub(crate) async fn connect_data_base(flag_connect_database: bool) -> Result<Arc<Client>> {
     dotenv().ok();
-    let database_url = var("DATABASE_URL").expect("DATABASE_URL must be set");
 
-    let (client, connection) = tokio_postgres::connect(&database_url, NoTls).await?;
+    if flag_connect_database {
+        let database_url = var("DATABASE_URL").expect("DATABASE_URL must be set");
 
-    tokio::spawn(async move {
-        if let Err(e) = connection.await {
-            eprintln!("connection error: {}", e);
-        }
-    });
+        let (client, connection) = tokio_postgres::connect(&database_url, NoTls).await?;
 
-    Ok(Arc::new(client))
+        task::spawn(async move {
+            if let Err(e) = connection.await {
+                eprintln!("connection error: {}", e);
+            }
+        });
+
+        Ok(Arc::new(client))
+    } else {
+        Err(anyhow!("Соединение с базой данных отключено"))
+    }
 }
