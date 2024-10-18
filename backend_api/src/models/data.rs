@@ -1,3 +1,5 @@
+use std::str::Bytes;
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize)]
@@ -11,4 +13,5 @@ pub(crate) struct CreateUser {
 pub(crate) struct User {
     pub(crate) id: u64,
     pub(crate) username: String,
+    pub(crate) email : String,
 }

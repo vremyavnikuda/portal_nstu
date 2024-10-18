@@ -1,6 +1,5 @@
 use axum::Router;
-use axum::routing::{post};
-use crate::controller::create_user::create_user;
+use crate::controller::create_user::create_users;
 use crate::controller::root::root;
 
 
@@ -8,6 +7,7 @@ use crate::controller::root::root;
 pub(crate) async fn route() -> Router {
     let app = Router::new()
         .merge(root().await)
-        .route("/users", post(create_user));
+        .merge(create_users().await);
+        //.route("/create_users", post(create_users));
     app
 }
